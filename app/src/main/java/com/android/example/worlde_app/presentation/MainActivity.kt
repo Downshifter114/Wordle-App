@@ -1,24 +1,22 @@
-package com.android.example.worlde_app
+package com.android.example.worlde_app.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.android.example.worlde_app.ui.theme.WorldeAppTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.android.example.worlde_app.presentation.composables.GameScreen
+import com.android.example.worlde_app.presentation.ui.theme.WorldeAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WorldeAppTheme {
-
-            }
+            val viewModel = viewModel<WordleViewModel>()
+            GameScreen(modifier = Modifier, viewModel = viewModel, onAction = viewModel::onAction)
         }
     }
 }

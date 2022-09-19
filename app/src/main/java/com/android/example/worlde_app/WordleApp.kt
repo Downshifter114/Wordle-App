@@ -1,4 +1,7 @@
 package com.android.example.worlde_app
 
-class WordleApp {
-}
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class WordleApp : Application()

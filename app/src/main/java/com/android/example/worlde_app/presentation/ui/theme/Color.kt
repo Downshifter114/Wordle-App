@@ -1,8 +1,10 @@
-package com.android.example.worlde_app.ui.theme
+package com.android.example.worlde_app.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+val WordleBackground = Color(0xFF121213)
+val WordleYellow = Color(0xFFb59f3b)
+val WordleGreen = Color(0xFF538d4e)
+val WordleLightGray = Color(0xFF818384)
+val WordleDarkGray = Color(0xFF3a3a3c)
+val PopUpBlack = Color(0xCC000000)
