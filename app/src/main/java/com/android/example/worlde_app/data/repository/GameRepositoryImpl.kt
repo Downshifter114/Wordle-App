@@ -3,6 +3,7 @@ package com.android.example.worlde_app.data.repository
 import android.os.Handler
 import android.os.Looper
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.toLowerCase
 import com.android.example.worlde_app.commons.GlobalStates
 import com.android.example.worlde_app.commons.GlobalStates.POP_UP_STATE
 import com.android.example.worlde_app.commons.GlobalStates.WORDLE_STATE
@@ -189,7 +190,8 @@ class GameRepositoryImpl: GameRepository {
         //if we're on the first guess
         if (WORDLE_STATE.guess_one.colors == List(5){ WordleBackground}) {
             val list = WORDLE_STATE.guess_one.letters.toMutableList()
-            val guessWord: String = list[0] + list[1] + list[2] + list[3] + list[4]
+            var guessWord: String = list[0] + list[1] + list[2] + list[3] + list[4]
+            guessWord = guessWord.lowercase(); ACTUAL_WORD = ACTUAL_WORD.lowercase()
             val colorList = WORDLE_STATE.guess_one.colors.toMutableList()
             val keyboardColorList = WORDLE_STATE.keyboard_colors.toMutableList()
 
@@ -215,7 +217,7 @@ class GameRepositoryImpl: GameRepository {
                                 if (list[j] == list[i])
                                 {
                                     vibeCheck = false
-                                    if (howManyAppearances(list[i], ACTUAL_WORD) == howManyAppearances(list[i], list.joinToString { "" }))
+                                    if (howManyAppearances(list[i], ACTUAL_WORD) == howManyAppearances(list[i], guessWord))
                                         vibeCheck = true
                                 }
                         }
@@ -247,7 +249,8 @@ class GameRepositoryImpl: GameRepository {
         //if we're on the second guess
         if (WORDLE_STATE.guess_two.colors == List(5){ WordleBackground}) {
             val list = WORDLE_STATE.guess_two.letters.toMutableList()
-            val guessWord: String = list[0] + list[1] + list[2] + list[3] + list[4]
+            var guessWord: String = list[0] + list[1] + list[2] + list[3] + list[4]
+            guessWord = guessWord.lowercase(); ACTUAL_WORD = ACTUAL_WORD.lowercase()
             val colorList = WORDLE_STATE.guess_two.colors.toMutableList()
             val keyboardColorList = WORDLE_STATE.keyboard_colors.toMutableList()
 
@@ -305,7 +308,8 @@ class GameRepositoryImpl: GameRepository {
         //if we're on the third guess
         if (WORDLE_STATE.guess_three.colors == List(5){ WordleBackground}) {
             val list = WORDLE_STATE.guess_three.letters.toMutableList()
-            val guessWord: String = list[0] + list[1] + list[2] + list[3] + list[4]
+            var guessWord: String = list[0] + list[1] + list[2] + list[3] + list[4]
+            guessWord = guessWord.lowercase(); ACTUAL_WORD = ACTUAL_WORD.lowercase()
             val colorList = WORDLE_STATE.guess_three.colors.toMutableList()
             val keyboardColorList = WORDLE_STATE.keyboard_colors.toMutableList()
 
@@ -363,7 +367,8 @@ class GameRepositoryImpl: GameRepository {
         //if we're on the fourth guess
         if (WORDLE_STATE.guess_four.colors == List(5){ WordleBackground}) {
             val list = WORDLE_STATE.guess_four.letters.toMutableList()
-            val guessWord: String = list[0] + list[1] + list[2] + list[3] + list[4]
+            var guessWord: String = list[0] + list[1] + list[2] + list[3] + list[4]
+            guessWord = guessWord.lowercase(); ACTUAL_WORD = ACTUAL_WORD.lowercase()
             val colorList = WORDLE_STATE.guess_four.colors.toMutableList()
             val keyboardColorList = WORDLE_STATE.keyboard_colors.toMutableList()
 
@@ -421,7 +426,8 @@ class GameRepositoryImpl: GameRepository {
         //if we're on the fifth guess
         if (WORDLE_STATE.guess_five.colors == List(5){ WordleBackground}) {
             val list = WORDLE_STATE.guess_five.letters.toMutableList()
-            val guessWord: String = list[0] + list[1] + list[2] + list[3] + list[4]
+            var guessWord: String = list[0] + list[1] + list[2] + list[3] + list[4]
+            guessWord = guessWord.lowercase(); ACTUAL_WORD = ACTUAL_WORD.lowercase()
             val colorList = WORDLE_STATE.guess_five.colors.toMutableList()
             val keyboardColorList = WORDLE_STATE.keyboard_colors.toMutableList()
 
@@ -479,7 +485,8 @@ class GameRepositoryImpl: GameRepository {
         //if we're on the sixth guess
         if (WORDLE_STATE.guess_six.colors == List(5){ WordleBackground}) {
             val list = WORDLE_STATE.guess_six.letters.toMutableList()
-            val guessWord: String = list[0] + list[1] + list[2] + list[3] + list[4]
+            var guessWord: String = list[0] + list[1] + list[2] + list[3] + list[4]
+            guessWord = guessWord.lowercase(); ACTUAL_WORD = ACTUAL_WORD.lowercase()
             val colorList = WORDLE_STATE.guess_six.colors.toMutableList()
             val keyboardColorList = WORDLE_STATE.keyboard_colors.toMutableList()
 

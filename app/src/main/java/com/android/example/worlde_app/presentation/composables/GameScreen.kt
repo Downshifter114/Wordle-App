@@ -26,6 +26,7 @@ import com.android.example.worlde_app.domain.util.Constants.GUESS_SPACING
 import com.android.example.worlde_app.domain.util.Constants.KEY_SIZE
 import com.android.example.worlde_app.domain.util.Constants.KEY_SPACING
 import com.android.example.worlde_app.domain.util.Constants.KEY_SYMBOL_LIST
+import com.android.example.worlde_app.domain.util.Constants.LIST_OF_WORDS
 import com.android.example.worlde_app.presentation.WordleViewModel
 import com.android.example.worlde_app.presentation.ui.theme.WordleBackground
 import com.android.example.worlde_app.presentation.ui.theme.WordleDarkGray
@@ -57,7 +58,7 @@ fun GameScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         //TOP BAR
-        TopBar(title = "ArApp", onAction = onAction)
+        TopBar(title = "WordleApp", onAction = onAction)
         Spacer(modifier = Modifier.height(15.dp))
 
         //GUESS SECTION
