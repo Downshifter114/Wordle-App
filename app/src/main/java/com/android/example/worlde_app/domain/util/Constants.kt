@@ -14,6 +14,6 @@ object Constants {
     val KEY_SYMBOL_LIST = listOf("Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L",
         "ENTER", "Z", "X", "C", "V", "B", "N", "M", "⌫")
     val KEY_SIZE = 35.dp
-    var LIST_OF_WORDS = listOf("BURAK", "KEMAL", "KUTAY", "KAYRA")
+    var LIST_OF_WORDS = listOf("BURAK", "KEMAL", "KUTAY", "KAYRA", "PIZZA")
     var ACTUAL_WORD = "PIZZA"
 }
