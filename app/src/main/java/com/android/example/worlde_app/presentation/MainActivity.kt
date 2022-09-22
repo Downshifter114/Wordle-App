@@ -17,6 +17,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val viewModel = viewModel<WordleViewModel>()
             viewModel.assignWordPool()
+            viewModel.createStatDatabase()
             GameScreen(modifier = Modifier, viewModel = viewModel, onAction = viewModel::onAction)
         }
     }

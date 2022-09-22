@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
+import com.android.example.worlde_app.commons.GlobalStates.STATS_STATE
 import com.android.example.worlde_app.domain.use_cases.user_actions.KeyboardAction
 import com.android.example.worlde_app.presentation.ui.theme.*
 
@@ -300,19 +301,19 @@ fun Stats(
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(text = "8", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 36.sp)
+                        Text(text = STATS_STATE.gamesPlayed.toString(), color = Color.White, fontWeight = FontWeight.Bold, fontSize = 36.sp)
                         Text(text = "Played\n", color = Color.White, fontSize = 18.sp)
                     }
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(text = "50", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 36.sp)
+                        Text(text = STATS_STATE.winPercentage.toString(), color = Color.White, fontWeight = FontWeight.Bold, fontSize = 36.sp)
                         Text(text = "Win %\n", color = Color.White, fontSize = 18.sp)
                     }
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(text = "0", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 36.sp)
+                        Text(text = STATS_STATE.currentStreak.toString(), color = Color.White, fontWeight = FontWeight.Bold, fontSize = 36.sp)
                         Text(text = "Current\nStreak", color = Color.White, fontSize = 18.sp, textAlign = TextAlign.Center)
                     }
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(text = "2", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 36.sp)
+                        Text(text = STATS_STATE.maxStreak.toString(), color = Color.White, fontWeight = FontWeight.Bold, fontSize = 36.sp)
                         Text(text = "Max\nStreak", color = Color.White, fontSize = 18.sp, textAlign = TextAlign.Center)
                     }
                 }
