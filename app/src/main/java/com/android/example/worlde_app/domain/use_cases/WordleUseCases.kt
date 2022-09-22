@@ -7,5 +7,5 @@ data class WordleUseCases(
     val toggleHowToPlay: ToggleHowToPlay,
     val toggleLose: ToggleLose,
     val toggleStats: ToggleStats,
-    val toggleWin: ToggleWin
+    val toggleWin: ToggleWin,
 )

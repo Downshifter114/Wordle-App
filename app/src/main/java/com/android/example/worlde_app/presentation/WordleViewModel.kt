@@ -29,52 +29,60 @@ class WordleViewModel @Inject constructor(
         }
     }
 
-    fun createStatDatabase() {
-        viewModelScope.launch {
-            if (statRepository.getStatById(0) == null)
-                statRepository.insertStat(Stat(0,0,0,0, 0, 0))
-            else if (statRepository.getStatById(1) == null)
-                statRepository.insertStat(Stat(0,0,0,0, 0,0))
-        }
-    }
-
     fun onAction(action: KeyboardAction) {
         when (action) {
             is KeyboardAction.AddLetter -> wordleUseCases.addLetter(action.letter)
             is KeyboardAction.Delete -> wordleUseCases.deleteLetter()
             is KeyboardAction.Submit -> {
                 wordleUseCases.submitGuess()
-                viewModelScope.launch {
-                    if (POP_UP_STATE.win) {
-                        val previous = statRepository.getStatById(0)
-                        statRepository.insertStat(previous!!.copy(
-                            gamesPlayed = previous!!.gamesPlayed+1,
-                            gamesWon = previous.gamesWon+1,
-                            winPercentage = 100*previous.gamesWon/previous.gamesPlayed,
-                            currentStreak = previous.currentStreak+1,
-                            maxStreak = if (previous.maxStreak < previous.currentStreak+1) previous.currentStreak else previous.maxStreak,
 
-                        ))
-                    }
-                    else if (POP_UP_STATE.lose) {
-                        val previous = statRepository.getStatById(0)
-                        statRepository.insertStat(Stat(
-                            gamesPlayed = previous!!.gamesPlayed+1,
-                            gamesWon = previous.gamesWon,
-                            winPercentage = 100*previous.gamesWon/previous.gamesPlayed,
-                            currentStreak = 0,
-                            maxStreak = previous.maxStreak,
-                        ))
-                    }
+                viewModelScope.launch {
+                    var _myStat = statRepository.getStatById(0)
+                    //initialize stat id 0 and 1
+                    if (statRepository.getStatById(id = 0) == null)
+                        statRepository.insertStat(Stat(0,0,0,0,0,0))
+                    //games played
+                    if (POP_UP_STATE.win || POP_UP_STATE.lose)
+                        _myStat = (_myStat!!.copy(gamesPlayed = _myStat!!.gamesPlayed+1))
+                    //games won
+                    if (POP_UP_STATE.win)
+                        _myStat = (_myStat!!.copy(gamesWon = _myStat.gamesWon+1, currentStreak = _myStat.currentStreak+1,
+                        maxStreak = if (_myStat.maxStreak < _myStat.currentStreak) _myStat.currentStreak+1 else _myStat.maxStreak))
+                    //win percentage
+                    _myStat = (_myStat!!.copy(winPercentage = 100*_myStat.gamesWon/_myStat.gamesPlayed))
+                    //current streak
+                    if (POP_UP_STATE.lose)
+                        _myStat = (_myStat!!.copy(currentStreak = 0))
+
+                    statRepository.insertStat(_myStat)
+
+
+                    val myStat = statRepository.getStatById(0)
+                    STATS_STATE = STATS_STATE.copy(
+                        gamesPlayed = myStat?.gamesPlayed ?: 0,
+                        gamesWon = myStat?.gamesWon ?: 0,
+                        winPercentage = myStat?.winPercentage ?: 0,
+                        currentStreak = myStat?.currentStreak ?: 0,
+                        maxStreak = myStat?.maxStreak ?: 0
+                    )
                 }
             }
             is KeyboardAction.ToggleHowToPlay -> wordleUseCases.toggleHowToPlay()
-            is KeyboardAction.ToggleStats -> wordleUseCases.toggleStats()
+            is KeyboardAction.ToggleStats -> {
+                viewModelScope.launch {
+                    val myStat = statRepository.getStatById(0)
+                    STATS_STATE = STATS_STATE.copy(
+                        gamesPlayed = myStat?.gamesPlayed ?: 0,
+                        gamesWon = myStat?.gamesWon ?: 0,
+                        winPercentage = myStat?.winPercentage ?: 0,
+                        currentStreak = myStat?.currentStreak ?: 0,
+                        maxStreak = myStat?.maxStreak ?: 0
+                    )
+                }
+                wordleUseCases.toggleStats()
+            }
             is KeyboardAction.ToggleWin -> wordleUseCases.toggleWin()
             is KeyboardAction.ToggleLose -> wordleUseCases.toggleLose()
         }
-
-
-
     }
 }
