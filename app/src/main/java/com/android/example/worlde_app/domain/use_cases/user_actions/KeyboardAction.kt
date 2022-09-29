@@ -8,4 +8,5 @@ sealed class KeyboardAction {
     object ToggleStats : KeyboardAction()
     object ToggleWin : KeyboardAction()
     object ToggleLose : KeyboardAction()
+    object ResetStats : KeyboardAction()
 }

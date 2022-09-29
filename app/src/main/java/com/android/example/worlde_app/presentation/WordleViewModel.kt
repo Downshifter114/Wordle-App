@@ -37,10 +37,11 @@ class WordleViewModel @Inject constructor(
                 wordleUseCases.submitGuess()
 
                 viewModelScope.launch {
-                    var _myStat = statRepository.getStatById(0)
+                    var _myStat = statRepository.getStatById(id = 0)
                     //initialize stat id 0 and 1
-                    if (statRepository.getStatById(id = 0) == null)
+                    if (_myStat == null)
                         statRepository.insertStat(Stat(0,0,0,0,0,0))
+                    _myStat = statRepository.getStatById(id = 0)
                     //games played
                     if (POP_UP_STATE.win || POP_UP_STATE.lose)
                         _myStat = (_myStat!!.copy(gamesPlayed = _myStat!!.gamesPlayed+1))
@@ -83,6 +84,23 @@ class WordleViewModel @Inject constructor(
             }
             is KeyboardAction.ToggleWin -> wordleUseCases.toggleWin()
             is KeyboardAction.ToggleLose -> wordleUseCases.toggleLose()
+            is KeyboardAction.ResetStats -> {
+                viewModelScope.launch {
+                    val limitedMode = statRepository.getStatById(id = 0)
+                    val unlimitedMode = statRepository.getStatById(id = 1)
+                    if (limitedMode != null)
+                        statRepository.deleteStat(limitedMode)
+                    if (unlimitedMode != null)
+                        statRepository.deleteStat(unlimitedMode)
+                    STATS_STATE = STATS_STATE.copy(
+                        gamesPlayed = 0,
+                        gamesWon = 0,
+                        winPercentage = 0,
+                        currentStreak = 0,
+                        maxStreak = 0
+                    )
+                }
+            }
         }
     }
 }

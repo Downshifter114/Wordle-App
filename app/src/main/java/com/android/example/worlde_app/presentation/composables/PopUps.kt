@@ -281,7 +281,7 @@ fun Stats(
         ) {
             Column(
                 modifier = modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(35.dp),
+                verticalArrangement = Arrangement.spacedBy(28.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 //Top bar
@@ -394,7 +394,6 @@ fun Stats(
                 ) {
                     Text(text = "NEXT WORDLE", color = Color.White,fontSize = 18.sp, textAlign = TextAlign.Center)
                     Text(text = "12:54:22", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 36.sp)
-                    Spacer(modifier = modifier.height(15.dp))
                 }
                 //Buttons
                 Row(
@@ -424,6 +423,26 @@ fun Stats(
                     ) {
                         Text(text = "Share", fontSize = 18.sp, color = Color.White,
                             modifier = modifier.align(Alignment.Center))
+                    }
+                }
+                //Reset Stats
+                Row(
+                    verticalAlignment = Alignment.Top,
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp)
+                        .padding(vertical = 10.dp)
+                ) {
+                    Box(
+                        modifier = modifier
+                            .clip(RoundedCornerShape(12.dp))
+                            .border(2.dp, Color.White, RoundedCornerShape(12.dp))
+                            .padding(vertical = 7.dp, horizontal = 18.dp)
+                            .clickable { onAction(KeyboardAction.ResetStats) }
+                    ) {
+                        Text(text = "Reset Stats", fontSize = 18.sp, color = Color.White, modifier = modifier.align(
+                            Alignment.Center))
                     }
                 }
             }
