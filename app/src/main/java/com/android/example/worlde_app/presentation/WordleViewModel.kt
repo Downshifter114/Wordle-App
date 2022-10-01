@@ -50,15 +50,20 @@ class WordleViewModel @Inject constructor(
                         _myStat = (_myStat!!.copy(gamesWon = _myStat.gamesWon+1, currentStreak = _myStat.currentStreak+1,
                         maxStreak = if (_myStat.maxStreak < _myStat.currentStreak) _myStat.currentStreak+1 else _myStat.maxStreak))
                     //win percentage
-                    _myStat = (_myStat!!.copy(winPercentage = 100*_myStat.gamesWon/_myStat.gamesPlayed))
+                    if (POP_UP_STATE.win || POP_UP_STATE.lose)
+                        _myStat = (_myStat!!.copy(winPercentage = 100*_myStat.gamesWon/_myStat.gamesPlayed))
                     //current streak
                     if (POP_UP_STATE.lose)
                         _myStat = (_myStat!!.copy(currentStreak = 0))
 
-                    statRepository.insertStat(_myStat)
+                    var myStat: Stat = Stat(0,0,0,0,0,0)
+                    if (_myStat != null)
+                        myStat = _myStat
+
+                    statRepository.insertStat(myStat)
 
 
-                    val myStat = statRepository.getStatById(0)
+                    myStat = statRepository.getStatById(0)!!
                     STATS_STATE = STATS_STATE.copy(
                         gamesPlayed = myStat?.gamesPlayed ?: 0,
                         gamesWon = myStat?.gamesWon ?: 0,
@@ -87,11 +92,8 @@ class WordleViewModel @Inject constructor(
             is KeyboardAction.ResetStats -> {
                 viewModelScope.launch {
                     val limitedMode = statRepository.getStatById(id = 0)
-                    val unlimitedMode = statRepository.getStatById(id = 1)
                     if (limitedMode != null)
                         statRepository.deleteStat(limitedMode)
-                    if (unlimitedMode != null)
-                        statRepository.deleteStat(unlimitedMode)
                     STATS_STATE = STATS_STATE.copy(
                         gamesPlayed = 0,
                         gamesWon = 0,
